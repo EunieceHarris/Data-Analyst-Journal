@@ -1,0 +1,47 @@
+-- 10/03/23
+-- SQL Beginner
+-- Subject: Using Case and Having Clause
+-- Objective: Apply Specific Bonuses/Raises Based on Job Title
+
+--Select * 
+--From EmployeeDemographics
+
+
+--Select * 
+--From EmployeeSalary
+
+--{This is practice for the Case Statement}
+
+--Select FirstName, LastName, JobTitle, Salary,
+--Case
+--	When JobTitle = 'Salesman' then Salary + (Salary * 0.15)
+--	When JobTitle = 'Regional Manager' then Salary + (Salary * 0.10)
+--	When JobTitle = 'HR' then Salary + (Salary * 0.0005)
+--	Else Salary + (Salary * 0.05)
+--End As 'Salary Bonus'
+--From EmployeeDemographics
+--Full Join EmployeeSalary
+--On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+--Where JobTitle is NOT NULL
+
+-- {This is practice for the Having Clause, clause}
+-- {Find more than one of the job titles}
+
+--Select JobTitle, Count(JobTitle)
+--From EmployeeDemographics
+--Join EmployeeSalary
+--On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+--Group By JobTitle
+--Having Count(JobTitle) > 1
+
+-- {This is practice for the Having Clause, clause.}
+-- {Find more than one of the job titles}
+
+Select JobTitle, Avg(Salary)
+From EmployeeDemographics
+Join EmployeeSalary
+On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Group By JobTitle 
+Having AVG(Salary) > 45000
+Order By AVG(Salary)
+
