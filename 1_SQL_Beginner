@@ -44,9 +44,36 @@ Insert Into EmployeeSalary Values
 
 Select * 
 From [SQL Tutorial].[dbo].[EmployeeDemographics]
+
 Select *
 From EmployeeDemographics
 
 Select *
 From EmployeeSalary
+
+
+--This queries specifies that the table be ordered by Gender and Job Title
+
+Select *
+From [SQL Tutorial].[dbo].[EmployeeDemographics]
+Order By Gender
+
+Select * 
+From [SQL Tutorial].[dbo].[EmployeeSalary]
+Order By JobTitle
+
+
+--The Group By query rolls up data and can be extracted. The query below selects Gender from the EmployeeDemographic table and counts how many of each. 
+Select Gender, Count(Gender)
+From [SQL Tutorial].[dbo].[EmployeeDemographics]
+Group By Gender
+
+
+
+
+
+
+
+
+
 
