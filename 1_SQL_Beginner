@@ -1,7 +1,7 @@
 -- 10/02/23
 -- SQL Beginner
 -- Subject: Using CREATE, Making Tables, INSERT, and *
--- Objective: Learn how to create tables, how to work with them, and manipulating data
+-- Objective: Create a table that lists Employees from The Office TV Show
 
 --Create Table EmployeeDemographics 
 --(EmployeeID int,
