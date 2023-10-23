@@ -4,7 +4,7 @@
 -- Objective: Create a table that lists Employees from The Office TV Show
 
 
--- This querie is creating a table with employees from Dunder Mifflin and a separate table with salaries
+-- This query is creating a table with employees from Dunder Mifflin and a separate table with salaries
 Create Table EmployeeDemographics 
 (EmployeeID int,
 FirstName varchar(50),
