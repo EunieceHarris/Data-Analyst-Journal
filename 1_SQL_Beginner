@@ -68,6 +68,16 @@ Select Gender, Count(Gender)
 From [SQL Tutorial].[dbo].[EmployeeDemographics]
 Group By Gender
 
+-- This query uses the WHERE function. I use this function to select a specific set of data I want returned
+Select * 
+From [SQL Tutorial].[dbo].[EmployeeDemographics]
+Where FirstName = 'Jim'
+--Where Age > 30
+--Gender = 'Male'
+--Where Age <= 32 AND Gender = 'Male'
+--Where LastName LIKE 'S%' <- pulla a last name that starts with S'
+--Where FirstName IN ('Jim', 'Michael',..) <-- pulls multiple values at once
+
 
 
 
