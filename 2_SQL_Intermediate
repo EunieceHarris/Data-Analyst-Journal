@@ -1,42 +1,57 @@
 -- 10/03/23
 -- SQL Beginner
 -- Subject: Using Case and Having Clause
--- Objective: Apply Specific Bonuses/Raises Based on Job Title
+-- Objective: Study and Apply Intermediate Functions/Concepts 
 
 --Select * 
 --From EmployeeDemographics
 
+--This query uses the JOIN Function to join tables. Has to have a similar column
+Select * 
+From [SQL Tutorial]..[EmployeeDemographics]
+Inner Join [SQL Tutorial]..[EmployeeSalary]
+  On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
 
---Select * 
---From EmployeeSalary
+--This query uses the UUNION and UNION ALL functions referencing EmployeeID and ordering by EmployeeID
+Select * 
+From [SQL Tutorial]..[EmployeeDemographics]
+UNION ALL
+Select *
+From [SQL Tutorial]..EmployeeDemographcis
+Select * From [SQL Tutorial]..EmployeeSalary
+Order By EmployeeID
 
---{This is practice for the Case Statement}
+-- This query uses the GROUP BY function 
+Select Gender, Age, COUNT (Gender) AS CountGender <- I want to see how many genders there are for each age
+From EmployeeDemographics
+Where Age > 31
+GROUP BY Gender
+Order By CountGender
 
---Select FirstName, LastName, JobTitle, Salary,
---Case
---	When JobTitle = 'Salesman' then Salary + (Salary * 0.15)
---	When JobTitle = 'Regional Manager' then Salary + (Salary * 0.10)
---	When JobTitle = 'HR' then Salary + (Salary * 0.0005)
---	Else Salary + (Salary * 0.05)
---End As 'Salary Bonus'
---From EmployeeDemographics
---Full Join EmployeeSalary
---On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
---Where JobTitle is NOT NULL
+--This is practice for the Case Statement. This function adds bonuses to employees with specific job title.
+Select FirstName, LastName, JobTitle, Salary,
+Case
+When JobTitle = 'Salesman' then Salary + (Salary * 0.15)
+When JobTitle = 'Regional Manager' then Salary + (Salary * 0.10)
+When JobTitle = 'HR' then Salary + (Salary * 0.0005)
+Else Salary + (Salary * 0.05)
+End As 'Salary Bonus'
+From EmployeeDemographics
+Full Outer Join EmployeeSalary
+On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Where JobTitle is NOT NULL
 
--- {This is practice for the Having Clause, clause}
--- {Find more than one of the job titles}
 
---Select JobTitle, Count(JobTitle)
---From EmployeeDemographics
---Join EmployeeSalary
---On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
---Group By JobTitle
---Having Count(JobTitle) > 1
+--This is practice for the Having Clause, clause; Find more than one of the job titles
+--
+Select JobTitle, Count(JobTitle)
+From EmployeeDemographics
+Join EmployeeSalary
+On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Group By JobTitle
+Having Count(JobTitle) > 1
 
--- {This is practice for the Having Clause, clause.}
--- {Find more than one of the job titles}
-
+--This is practice for the Having Clause, clause. Find more than one of the job titles
 Select JobTitle, Avg(Salary)
 From EmployeeDemographics
 Join EmployeeSalary
@@ -44,4 +59,36 @@ On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
 Group By JobTitle 
 Having AVG(Salary) > 45000
 Order By AVG(Salary)
+
+--Updating and Deleting Data
+Select * 
+From [SQL Tutorial]..[EmployeeDemographics]
+
+UPDATE [SQL Tutorial]..[EmployeeDemographics]
+Set Age = 666
+Where FirstName = 'Toby' AND LastName = "Flenderson'
+
+DELETE FROM [SQL Tutorial]..EmployeeDemographics
+Where EmployeeID = 1005
+
+--Using the Aliasing Function to rename columns to something simplar
+Select FirstName + ' ' +  LastName AS FullName
+From {SQL Tutorial]..[EmployeeDemographics]
+
+Select Dem.EmployeeID, Sal.EmployeeSalary
+From [SQL Tutorial]..[EmployeeDemographics] AS Dem
+Join [SQL Tutorial]..[EmployeeSalary] AS Sal
+
+-- Using the Partition By function. This was difficult to grasp but from what I understand, it means that it will divides a specified query result into partitions. I will use the example provided by Alex the Analyst.
+Select FirstName, LastName, Gender, Salary,
+COUNT(Gender) OVER (PARTITION BY Gender) as TotalGender
+From [SQL Tutorial]..[EmployeeDeomographics] dem
+Join [SQL Tutorial]..[EmployeeSalary] sal
+  On sal.EmployeeID = dem.EmployeeID
+
+
+
+
+
+
 
