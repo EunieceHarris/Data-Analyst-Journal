@@ -1,1 +1,21 @@
+-- 10/23/23
+-- SQL Advanced
+-- Objective: Study and Apply Advanced Functions/Concepts 
 
+
+-- Using CTE (Common Table Expression) to make a sub-query like query and write a query that pull information from it
+WITH CTE_Employee as 
+(Select FirstName, LastName, Gender, Salary,
+COUNT(Gender) OVER (PARTITION BY Gender) as TotalGender,
+AVG(Salary) OVER (PARTITION BY Gender) as AvgSalary
+FROM SQLTutorial..EmployeeDemographics emp
+JOIN SQLTuturial..EmployeeSalary sal
+  ON emp.EmployeeID = sal.EmployeeID
+WHERE Salary > '45000'
+)
+Select FirstName, Salary
+From CTE_Employee
+
+--What did I find? (This is my current understanding. Hopefully in time I will grasp the correct use if not here)
+-- First I used a CTE to essential make a sub query. I wanted look for employees with a salary of $45,000, take the FirstName, LastName, Gender, and Salary. Then count and distinguish all of the genders, then find the average salary of the genders. Last, I wanted to get the FirstNames and Salary from the results of the CTE.
+-- The CTE is not stored anywhere, unlike a sub query
